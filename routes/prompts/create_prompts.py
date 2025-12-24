@@ -6,26 +6,29 @@ from GeminiClient import GeminiClient
 
 geminiClient = GeminiClient()
 client = SupabaseClient()
-
-
-# {
-#   "original_prompt": "I want to create a website about cars",
-#   "is_private": true,
-#   "tags": "website,html",
-#   "user_id": "01c462b4-3751-4d1b-8034-c507e9b6205e"
-# }
-
-
 router = APIRouter()
 
-@router.post("/prompts", response_model=List[ResponsePrompt], status_code=status.HTTP_201_CREATED)
+@router.post("/prompts", response_model=ResponsePrompt, status_code=status.HTTP_201_CREATED)
 def create_prompt(prompt: RequestPrompt):
+    # Takes in a prompt:
+    # - Generates an optimised prompt using Gemini API
+    # - Stores original and optimised prompt in Supabse 
+
     try:
         prompt_data = prompt.model_dump()
         optimised_prompt = geminiClient.generateOptimisedPrompt(prompt_data["original_prompt"])
         prompt_data["optimised_prompt"] = optimised_prompt
         created_prompt = client.insert(table='prompts', data=prompt_data)
-        return created_prompt
+        
+    
+        if not created_prompt:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Error optimising prompt"
+            ) 
+        
+
+        return ResponsePrompt(**created_prompt[0])
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
