@@ -1,5 +1,5 @@
 from fastapi import HTTPException, APIRouter, status
-from supabaseClient import SupabaseClient
+from services.supabase_client import SupabaseClient
 from models.favourites import RequestFavourites, ResponseFavourites
 from typing import List
 

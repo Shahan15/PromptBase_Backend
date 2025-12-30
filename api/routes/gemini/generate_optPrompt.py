@@ -1,5 +1,5 @@
 from fastapi import HTTPException, APIRouter, status
-from GeminiClient import GeminiClient
+from services.gemini_client import GeminiClient
 from models.gemini import RequestPrompt
 from typing import List
 

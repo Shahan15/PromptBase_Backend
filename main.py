@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from datetime import datetime
-from routes import (users_router, prompts_router,favourites_router)
+from api.routes import (users_router, prompts_router,favourites_router)
 from dotenv import load_dotenv
 import os
 

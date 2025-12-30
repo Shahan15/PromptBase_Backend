@@ -1,5 +1,5 @@
 from fastapi import HTTPException, APIRouter, status
-from supabaseClient import SupabaseClient
+from services.supabase_client import SupabaseClient
 from models.users import RequestUser, ResponseUser
 
 client = SupabaseClient()
