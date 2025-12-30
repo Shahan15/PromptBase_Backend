@@ -1,16 +1,13 @@
-from dotenv import load_dotenv
 from google import genai
-import os
-
-load_dotenv()
+from app.core.config import settings
 
 class GeminiClient:
     def __init__(self):
-        api_key : str = os.getenv("GEMINI_API_KEY")
-        model = os.getenv('GEMINI_MODEL','gemini-2.5-flash')
+        api_key : str = settings.GEMINI_API_KEY
+        model = settings.GEMINI_MODEL
 
         if not api_key:
-            raise ValueError(
+            raise ValueError(  
                 "Missing GEMINI_API_KEY"
             )
         
@@ -26,7 +23,7 @@ class GeminiClient:
         
         # SENDS PROMPT TO GEMINI TO BE OPTIMISED
 
-        response = self.client.models.generate_content(
+        response = self.client.app.models.generate_content(
             model = self.model,
             contents = self.context + f"\n PROMPT:{prompt}" 
         )

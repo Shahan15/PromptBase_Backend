@@ -1,6 +1,6 @@
-from services.supabase_client import SupabaseClient
+from app.services.supabase_client import SupabaseClient
 from fastapi import HTTPException, APIRouter,status
-from models.prompts import PromptUpdateSchema
+from app.models.prompts import PromptUpdateSchema
 from uuid import UUID  
 
 client = SupabaseClient()

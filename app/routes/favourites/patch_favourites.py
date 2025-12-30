@@ -1,7 +1,7 @@
-from services.supabase_client import SupabaseClient
+from app.services.supabase_client import SupabaseClient
 from fastapi import HTTPException, APIRouter, status
 from uuid import UUID
-from models.favourites import FavouritesUpdateSchema,ResponseFavourites
+from app.models.favourites import FavouritesUpdateSchema,ResponseFavourites
 
 client = SupabaseClient()
 

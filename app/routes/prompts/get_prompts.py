@@ -1,6 +1,6 @@
 from fastapi import HTTPException, APIRouter
-from services.supabase_client import SupabaseClient
-from models.prompts import ResponsePrompt
+from app.services.supabase_client import SupabaseClient
+from app.models.prompts import ResponsePrompt
 from typing import List
 
 client = SupabaseClient()

@@ -1,5 +1,5 @@
 from fastapi import HTTPException, APIRouter,status
-from services.supabase_client import SupabaseClient
+from app.services.supabase_client import SupabaseClient
 from uuid import UUID
 
 client = SupabaseClient()

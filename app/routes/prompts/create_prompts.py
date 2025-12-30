@@ -1,8 +1,8 @@
 from fastapi import HTTPException, APIRouter, status
-from services.supabase_client import SupabaseClient
-from models.prompts import RequestPrompt, ResponsePrompt
+from app.services.supabase_client import SupabaseClient
+from app.models.prompts import RequestPrompt, ResponsePrompt
 from typing import List
-from services.gemini_client import GeminiClient
+from app.services.gemini_client import GeminiClient
 
 geminiClient = GeminiClient()
 client = SupabaseClient()

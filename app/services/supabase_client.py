@@ -1,17 +1,13 @@
-import os
 from supabase import create_client, Client
-from dotenv import load_dotenv
-
-load_dotenv()
-
+from app.core.config import settings
 
 class SupabaseClient:
 
     # this runs when you create an object of the class
     def __init__(self):
-        self.__url: str = os.getenv("SUPABASE_URL")
-        self.__key: str = os.getenv("SUPABASE_KEY")
-
+        self.__key: str = settings.SUPABASE_KEY
+        self.__url: str = settings.SUPABASE_URL
+        
         if not self.__url or not self.__key:
             raise ValueError(
                 "Missing environment variables check environment variables")

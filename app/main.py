@@ -1,15 +1,8 @@
 from fastapi import FastAPI
 from datetime import datetime
-from api.routes import (users_router, prompts_router,favourites_router)
-from dotenv import load_dotenv
-import os
-
+from app.routes import (users_router, prompts_router,favourites_router)
 
 app = FastAPI()
-
-print(os.getenv("SUPABASE_URL"))
-print(os.getenv("SUPABASE_KEY"))
-
 
 @app.get("/")
 def read_root():

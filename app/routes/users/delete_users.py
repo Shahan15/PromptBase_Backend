@@ -1,4 +1,4 @@
-from services.supabase_client import SupabaseClient
+from app.services.supabase_client import SupabaseClient
 from fastapi import HTTPException, APIRouter,status
 from uuid import UUID  # Import the UUID type
 
