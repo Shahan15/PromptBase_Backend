@@ -1,20 +1,29 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,EmailStr
 from typing import Optional
+from uuid import UUID
 
 
 class ResponseUser(BaseModel):
-    id: Optional[str] = None
+    id: UUID
     first_name: str
     last_name: str
-    email: Optional[str] = None
+    email: EmailStr
 
 
 class RequestUser(BaseModel):
     first_name: str
     last_name: str
-    email: str
+    email: EmailStr
     password: str
 
+
+class UserCreate(BaseModel):
+    email : EmailStr
+    password : str
+
+class UserLogin(BaseModel):
+    email : EmailStr
+    password : str
 
 class UserUpdateSchema(BaseModel):
     first_name: Optional[str] = None

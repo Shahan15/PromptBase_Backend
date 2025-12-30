@@ -1,5 +1,7 @@
 from fastapi import HTTPException, APIRouter
 from supabaseClient import SupabaseClient
+from models.users import ResponseUser
+from typing import List
 
 
 client = SupabaseClient()
@@ -7,12 +9,11 @@ client = SupabaseClient()
 router = APIRouter()
 
 
-@router.get("/users")
+@router.get("/users",response_model=List[ResponseUser])
 def get_users():
     try:
         data = client.fetch('users')
-        print(f"THE DATA IS: {data}")
-        return {"success": True, "data": data, "count": len(data)}
+        return data
     except Exception as e:
         raise HTTPException(
             status_code=500, detail=f"Error fetching users: {str(e)}")
