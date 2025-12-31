@@ -20,7 +20,8 @@ async def login(data : LoginRequest):
 
     if not user or len(user) == 0:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND("User not found")
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=("User not found")
         )
     
     user = user[0]
