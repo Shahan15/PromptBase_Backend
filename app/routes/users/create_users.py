@@ -7,7 +7,7 @@ client = SupabaseClient()
 
 router = APIRouter()
 
-@router.post("/", response_model=ResponseUser, status_code=status.HTTP_201_CREATED)
+@router.post("/register", response_model=ResponseUser, status_code=status.HTTP_201_CREATED)
 def create_user(new_user: UserCreate):
     existing_user = client.fetch(
         table='users',

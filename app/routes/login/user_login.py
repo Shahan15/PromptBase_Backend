@@ -2,6 +2,7 @@ from fastapi import APIRouter,HTTPException,status
 from app.services.supabase_client import SupabaseClient
 from app.models.login import LoginRequest
 from app.core.jwt_handler import create_JWT_Token
+from app.core.security import verify_password
 
 router = APIRouter()
 supabaseClient = SupabaseClient()
@@ -20,16 +21,17 @@ async def login(data : LoginRequest):
 
     if not user or len(user) == 0:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail=("User not found")
         )
     
     user = user[0]
     
-    if user['password'] != data.password:
+    verify_hash = verify_password(data.password,user['password'])
+    if verify_hash == False:
         raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED("invalid Credentials")
     )
     
-
-    return create_JWT_Token(user_id=str(user['id']))
+    token = create_JWT_Token(user_id=str(user['id']))
+    return {"access token": token,"token_type":"bearer"}
