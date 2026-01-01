@@ -23,7 +23,7 @@ class GeminiClient:
         
         # SENDS PROMPT TO GEMINI TO BE OPTIMISED
 
-        response = self.client.app.models.generate_content(
+        response = self.client.models.generate_content(
             model = self.model,
             contents = self.context + f"\n PROMPT:{prompt}" 
         )

@@ -1,7 +1,9 @@
-from .prompt import ResponsePrompt, RequestPrompt,PromptUpdateSchema
+from .prompt import ResponsePrompt, RequestPrompt,PromptUpdateSchema,PromptGenerationRequest,PromptGenerationResponse
 
 __all__ = [
     "ResponsePrompt",
     "RequestPrompt",
-    "PromptUpdateSchema"
+    "PromptUpdateSchema",
+    "PromptGenerationRequest",
+    "PromptGenerationResponse"
 ]
