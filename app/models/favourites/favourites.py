@@ -7,12 +7,14 @@ from datetime import datetime
 
 class RequestFavourites(BaseModel):
     prompt_id: str
+    user_id : str
 
 
 class ResponseFavourites(BaseModel):
-    id: UUID
+    id: str
     created_at: datetime
     prompt_id: str
+    user_id : str
 
 
 

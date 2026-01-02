@@ -21,7 +21,7 @@ class ResponsePrompt(BaseModel):
     user_id: UUID
 
 class PromptGenerationRequest(BaseModel):
-    user_id: Optional[str] = None 
+    user_id: str
     original_prompt: str
     is_private: Optional[bool] = True
     tags: Optional[str] = ""
@@ -31,7 +31,7 @@ class PromptGenerationResponse(BaseModel):
     created_at: datetime
     original_prompt: str
     optimised_prompt: str
-    user_id: Optional[str] = None
+    user_id: str
     is_private: bool
     tags: Optional[str] = ""
 
