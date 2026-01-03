@@ -6,8 +6,8 @@ from datetime import datetime
 
 
 class RequestFavourites(BaseModel):
-    prompt_id: str
-    user_id : str
+    original_prompt : str
+    optimised_prompt : str
 
 
 class ResponseFavourites(BaseModel):

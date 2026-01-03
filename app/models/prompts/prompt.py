@@ -17,17 +17,16 @@ class ResponsePrompt(BaseModel):
     original_prompt: str
     optimised_prompt: str
     is_private: bool
-    tags: str
+    tags: Optional[str] = None
     user_id: UUID
 
 class PromptGenerationRequest(BaseModel):
-    user_id: str
     original_prompt: str
     is_private: Optional[bool] = True
     tags: Optional[str] = ""
 
 class PromptGenerationResponse(BaseModel):
-    id: str 
+    id: Optional[str] = "" 
     created_at: datetime
     original_prompt: str
     optimised_prompt: str
