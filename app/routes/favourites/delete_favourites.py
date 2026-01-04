@@ -8,22 +8,21 @@ router = APIRouter()
 @router.delete('/favourites/{favourite_id}')
 def delete_favourites(favourite_id : UUID):
     try:
-        result = client.delete(
-            table = 'favourites',
-            pk_id= favourite_id
+        # fetch to find the associated prompt_id
+        records = client.fetch(table='favourites', filters={'id': favourite_id})
+        
+        if not records:
+            raise HTTPException(status_code=404, detail="Favourite not found")
+            
+        target_prompt_id = records[0].get('prompt_id')
+
+        # 2. Delete the PROMPT
+        client.delete(
+            table='prompts',
+            pk_id=target_prompt_id 
         )
 
-        if not result or len(result) == 0:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail=f'Could not find favourite with favourite id : {favourite_id}'
-            )
-        return
-    except HTTPException:
-        raise
+        return {"message": "Success: Prompt and favourite removed"}
 
     except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f'Error deleting favourite: {str(e)}'
-        )
+        raise HTTPException(status_code=500, detail=str(e))

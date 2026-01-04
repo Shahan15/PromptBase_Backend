@@ -57,7 +57,7 @@ class SupabaseClient:
         response = query.execute()
         return response.data
 
-    def delete(self, table: str, pk_id: int = None, filters: dict = None):
+    def delete(self, table: str, pk_id: str = None, filters: dict = None):
         # delete from table
         query = self.__supabase.table(table).delete()
 
