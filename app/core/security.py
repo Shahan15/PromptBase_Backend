@@ -18,7 +18,7 @@ def verify_password(plain : str, hashed : str) -> bool:
     return pwd_context.verify(plain,hashed)
 
 
-# CHECKING FOR CURRENT USER --> if token is 
+# CHECKING FOR CURRENT USER
 def get_current_user(token : str = Depends(oauth2_scheme)):
     decoded_token = decode_JWT_token(token)
 
