@@ -12,10 +12,9 @@ router = APIRouter()
 def update_users_profile(user_id: UUID, userUpdate: UserUpdateSchema):
     # PARTIAL UPDATE
     try:
-        # Ensure dict only contains fields the user actually sends. ignores None values
+        # Ensures dict only contains fields the user actually sends. ignores None values
         update_data = userUpdate.model_dump(exclude_unset=True)
 
-        # if not fields are provided
         if not update_data:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -30,7 +29,6 @@ def update_users_profile(user_id: UUID, userUpdate: UserUpdateSchema):
             updates=update_data
         )
 
-        # if user cannot be found
         if not updates:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,

@@ -1,7 +1,6 @@
 from fastapi import HTTPException, APIRouter, status
 from app.services.supabase_client import SupabaseClient
 from app.models.favourites import RequestFavourites, ResponseFavourites
-from typing import List
 from fastapi import Depends
 from app.core.security import get_current_user
 

@@ -1,6 +1,5 @@
 from fastapi import APIRouter,HTTPException,status
 from app.services.supabase_client import SupabaseClient
-from app.models.login import LoginRequest
 from app.core.jwt_handler import create_JWT_Token
 from app.core.security import verify_password
 from fastapi.security import OAuth2PasswordRequestForm

@@ -1,6 +1,5 @@
 from app.services.supabase_client import SupabaseClient
 from fastapi import HTTPException, APIRouter,status
-from uuid import UUID  
 from fastapi import Depends
 from app.core.security import get_current_user
 

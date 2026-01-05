@@ -1,8 +1,6 @@
 from fastapi import FastAPI
-from datetime import datetime
 from app.routes import (users_router, prompts_router,favourites_router,login_router)
 from fastapi.middleware.cors import CORSMiddleware
-from uuid import UUID
 
 app = FastAPI()
 
