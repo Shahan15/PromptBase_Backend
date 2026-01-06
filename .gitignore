@@ -1,2 +1,23 @@
-venv/
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment Variables (CRITICAL: Prevents leaking API keys/Supabase keys)
 .env
+.env.local
+.env.*
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
