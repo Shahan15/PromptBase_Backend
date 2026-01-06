@@ -22,9 +22,55 @@ The React-based frontend for this project is located here:
 
 ---
 
+## 🗂️ Database Schema
+
+Before running the backend, you must set up the following tables in your Supabase project.
+
+
+### 1. Schema Overview
+* **`users`**: Managed primarily by Supabase Auth, but extended with custom fields like `first_name` and `last_name`.
+* **`prompts`**: Stores the `original_prompt`, the Gemini-generated `optimised_prompt`, and a `user_id` foreign key.
+* **`favourites`**: A join table linking `user_id` to `prompt_id` for quick filtering.
+
+### 2. SQL Setup Script
+Copy and paste this into your **Supabase SQL Editor** to create the necessary tables:
+
+```sql
+-- Create Users Table (Extended profile)
+CREATE TABLE users (
+  id UUID REFERENCES auth.users ON DELETE CASCADE PRIMARY KEY,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  first_name TEXT,
+  last_name TEXT,
+  email TEXT UNIQUE,
+  password TEXT -- Stored as a hashed string
+);
+
+-- Create Prompts Table
+CREATE TABLE prompts (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  original_prompt TEXT NOT NULL,
+  optimised_prompt TEXT,
+  is_private BOOLEAN DEFAULT TRUE,
+  tags TEXT, -- Comma-separated strings
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE
+);
+
+-- Create Favourites Table
+CREATE TABLE favourites (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  prompt_id UUID REFERENCES prompts(id) ON DELETE CASCADE,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE
+);
+```
+
+
+
 ## 🛠️ Installation & Setup
 
-### 1. Clone & Environment
+### 3. Clone & Environment
 ```bash
 git clone https://github.com/Shahan15/PromptBase_Backend.git
 cd PromptBase_Backend
@@ -33,7 +79,7 @@ source venv/bin/activate
 
 ```
 
-## 2. Install Dependencies
+##  Install Dependencies
 
 This project requires **specific version pinning** to resolve compatibility issues between `passlib` and newer `bcrypt` versions on macOS.
 
@@ -51,7 +97,7 @@ pip install supabase python-dotenv pydantic-settings google-genai
 ```bash
 pip install "passlib[bcrypt]" bcrypt==4.0.1
 ```
-## 3. Environment Variables
+## 4. Environment Variables
 Create a .env file in the root directory:
 ```env
 Code snippet
