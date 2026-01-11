@@ -13,7 +13,6 @@ router = APIRouter()
 def create_prompt(prompt: PromptGenerationRequest,user = Depends(get_current_user)):
     # Takes in a prompt:
     # - Generates an optimised prompt using Gemini API
-    # - Stores original and optimised prompt in Supabase 
     try:
         optimised_prompt = geminiClient.generateOptimisedPrompt(prompt.original_prompt)
 
