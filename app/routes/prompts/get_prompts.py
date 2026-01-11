@@ -1,4 +1,4 @@
-from fastapi import HTTPException, APIRouter
+from fastapi import HTTPException, APIRouter,status
 from app.services.supabase_client import SupabaseClient
 from app.models.prompts import ResponsePrompt
 from typing import List
@@ -19,6 +19,6 @@ def get_prompts(user = Depends(get_current_user)):
         return data
     except Exception as e:
         raise HTTPException(
-            status_code=500,
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error fetching prompts: {str(e)}"
         )

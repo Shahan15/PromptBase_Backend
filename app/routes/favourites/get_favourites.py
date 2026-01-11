@@ -15,4 +15,4 @@ def get_favourites(user = Depends(get_current_user)):
         return data
     except Exception as e:
         raise HTTPException(
-            status_code=500, detail=f"Error fetching favourites: {str(e)}")
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Error fetching favourites: {str(e)}")

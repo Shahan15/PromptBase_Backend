@@ -12,7 +12,7 @@ def delete_favourites(favourite_id : UUID):
         records = client.fetch(table='favourites', filters={'id': favourite_id})
         
         if not records:
-            raise HTTPException(status_code=404, detail="Favourite not found")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Favourite not found")
             
         target_prompt_id = records[0].get('prompt_id')
 
