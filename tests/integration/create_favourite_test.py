@@ -8,6 +8,7 @@ testclient = TestClient(app)
 def mock_get_current_user():
     return {'id':'1231231'}
 
+#TEST TO FAVOURITE A PROMPT AND INSERT IT INTO DB
 @patch("app.routes.favourites.create_favourites.client")
 def test_create_favourite(mock_supabase):
     created_prompt_return = [{"id" : "fake-promptID"}]

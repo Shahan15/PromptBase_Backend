@@ -1,6 +1,7 @@
 from app.core.jwt_handler import create_JWT_Token,decode_JWT_token
 
 
+#CREATING VALID JWT AND DECODING 
 def test_create_jwt():
     user_id = 'test@example.com'
     token = create_JWT_Token(user_id)

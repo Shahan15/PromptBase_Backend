@@ -16,8 +16,15 @@ def test_create_prompt(mock_gemini):
     app.dependency_overrides[get_current_user] = mock_get_current_user
     post_call = testClient.post('/refine',json={"original_prompt":"Generate a fake prompt for me"})
     response_data = post_call.json()
+
     assert post_call.status_code == 201
     assert "original_prompt" in response_data
     assert response_data["optimised_prompt"] == 'Fake optimised prompt'
+
+    print(f"\n--- DEBUG DATA ---")
+    print(f"Status: {post_call.status_code}")
+    print(f"Response JSON: {post_call.json()}")
+    print(f"------------------\n")
+
     #cleaning up dependency overrides
     app.dependency_overrides = {}
